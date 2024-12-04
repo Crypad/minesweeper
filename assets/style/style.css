@@ -1,0 +1,57 @@
+/* Reset */
+
+* {
+    padding: 0;
+    margin: 0;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-image: url(../img/battleground.jpg);
+    background-position: center;
+    background-size: cover;
+}
+
+/* ------------------ */
+
+h1 {
+    margin-bottom: 20px;
+    border-bottom: 3px solid black;
+}
+
+#battleG {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+}
+
+.row {
+    display: flex;
+}
+
+.case {
+    text-align: center;
+    font-size: 1.5rem;
+    border: 1px solid black;
+    background: #d3d3d3;
+    background: radial-gradient(ellipse farthest-corner at center center, #d3d3d3 0%, #a0a0a0 100%);
+    background: -webkit-radial-gradient(ellipse farthest-corner at center center, #d3d3d3 0%, #a0a0a0 100%);
+    background: -moz-radial-gradient(ellipse farthest-corner at center center, #d3d3d3 0%, #a0a0a0 100%);
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+}
+
+.uncovered {
+    background: white;
+    cursor: pointer;
+}
+
+.bombe {
+    background: red;
+}
