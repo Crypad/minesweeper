@@ -151,7 +151,10 @@ globalThis.nbrBombeTotal = 0;
 
 console.dir(playground)
 
-
+document.querySelector("#info").addEventListener("click", () => {
+    document.querySelector("#infoDiv").classList.toggle("hide");
+    document.querySelector("#infoDiv").classList.toggle("show");
+});
 
 play();
 
