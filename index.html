@@ -14,11 +14,28 @@
         <p><span>Clic gauche</span> pour découvrir une case.</p>
         <p><span>Mouse Wheel Clic</span> pour marquer une case.</p>
     </div>
-    <h1>💣Minesweeper🚩</h1>
-    <h2 id="nbrBtotal">Nombre de bombe : </h2>
-    <div id="battleG">
-        
+    
+    <div id="choice">
+        <h1>💣Minesweeper🚩</h1>
+        <label for="difficulty">Choisissez la probabilité qu'une bombe apparaisse sur chaque case (0 à 100%) :</label>
+        <input type="number" name="difficulty" id="difficulty" placeholder="Choix de la difficulté" max="100">
+        <label for="difficulty">Choisissez la taille de la grille :</label>
+        <p>Taille de la grille : <span class="size"></span> X <span class="size"></span></p>
+        <input type="range" id="gridSize" name="gridSize" min="0" max="20" step="1" value="10">
+
+        <div><a href="./game.html"><button id="playNow">Jouer</button></a></div>
     </div>
 </body>
+
+<!-- <script>
+    document.querySelectorAll(".size").forEach(element => {
+            element.innerHTML = document.getElementById("gridSize").value;
+        })
+    document.getElementById("gridSize").oninput = () => {
+        document.querySelectorAll(".size").forEach(element => {
+            element.innerHTML = document.getElementById("gridSize").value;
+        })
+    }
+</script> -->
 
 </html>

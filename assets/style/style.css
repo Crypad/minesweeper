@@ -18,7 +18,49 @@ body {
     background-size: cover;
 }
 
-/* ------------------ */
+/* index.html */
+
+#choice {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    width: 40%;
+    padding: 1.5rem 6rem;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 2px solid rgb(47, 47, 47);
+    border-radius: 10px;
+}
+#choice label {
+    margin: 1rem 0;
+    font-weight: 600;
+}
+#difficulty {
+    width: 100%;
+}
+
+#gridSize {
+    width: 100%;
+}
+
+#playNow {
+    margin: 1rem 0;
+    padding: 1rem 2rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+
+
+
+
+
+
+
+
+
+/* game.html */
 
 #info {
     position: absolute;
@@ -33,6 +75,22 @@ body {
 }
 
 #info:hover {
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+#restart {
+    position: absolute;
+    top: 1.5rem;
+    left: 1.5rem;
+    padding: .5rem;
+    background-color: rgba(255, 255, 255, 0.418);
+    border: 2px solid rgb(255, 255, 255);
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all .3s ease-in-out;
+}
+
+#restart:hover {
     background-color: rgba(255, 255, 255, 0.8);
 }
 
@@ -84,8 +142,8 @@ h1 {
     background: radial-gradient(ellipse farthest-corner at center center, #d3d3d3 0%, #a0a0a0 100%);
     background: -webkit-radial-gradient(ellipse farthest-corner at center center, #d3d3d3 0%, #a0a0a0 100%);
     background: -moz-radial-gradient(ellipse farthest-corner at center center, #d3d3d3 0%, #a0a0a0 100%);
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     cursor: pointer;
 }
 
