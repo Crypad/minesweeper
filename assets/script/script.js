@@ -3,7 +3,7 @@ function generateSquareGrid(rows) {
     for (let i = 0; i < rows; i++) {
         let row = [];
         for (let j = 0; j < rows; j++) {
-            row.push(0);
+            row.push(null);
         }
         grid.push(row);
     }
@@ -11,6 +11,8 @@ function generateSquareGrid(rows) {
 }
 
 const initPG = () => {
+    console.log(playground.length)
+    console.log(playground[0].length)
     for (let indexX = 0; indexX < playground.length; indexX++) {
         for (let indexY = 0; indexY < playground[indexX].length; indexY++) {
 
@@ -33,13 +35,13 @@ const initPG = () => {
             let bloc = document.createElement("div");
             // A retirer
 
-            /* if (playground[indexX][indexY] == "bombe") {
+/*             if (playground[indexX][indexY] == "bombe") {
                 bloc.innerHTML = "💣";
             } */
 
             // --------
             bloc.classList.add("case");
-            bloc.id = `${indexX}${indexY}`;
+            bloc.id = `${indexX}-${indexY}`;
             row.append(bloc);
         }
 
@@ -102,28 +104,59 @@ const play = () => {
     initPG();
     document.querySelectorAll(".case").forEach(element => {
         element.addEventListener("click", function () {
+            
+            let identifier = element.id;
+            let parts = identifier.split('-');
+            if (parts.length === 2) {
+                let indexX = parseInt(parts[0]);
+                let indexY = parseInt(parts[1]);
+                if (indexX <= 19 && indexY <= 19) {
+                    console.log(`Coordonnées : (${indexX}, ${indexY})`);
+                    
+                    
+                    if (playground[indexX][indexY] !== "bombe") {
+                        if (checkAround(indexX, indexY) != 0) {
+                            element.classList.add("uncovered");
+                            element.innerHTML = checkAround(indexX, indexY);
+                        } else {
+                            element.classList.add("uncovered");
+                        }
+                    } else {
+                        console.log("pute1")
+                        element.innerHTML = "💣";
+                        element.classList.add("bombe");
+                        
+                        console.log("pute1")
+                        for (let indexX = 0; indexX < playground.length; indexX++) {
+                            console.log("pute1")
+                            for (let indexY = 0; indexY < playground[indexX].length; indexY++) {
+                                if (playground[indexX][indexY] == "bombe") {
+                                    document.getElementById(`${indexX}-${indexY}`).innerHTML = "💣";
+                                    document.getElementById(`${indexX}-${indexY}`).classList.add("bombe");
+                                }
+                            }
+                        }
 
-            let identifier = element.id.substring(0);
-            let indexX = parseInt(identifier.charAt(0));
-            let indexY = parseInt(identifier.charAt(1));
 
-            console.log(indexX, indexY);
 
-            if (playground[indexX][indexY] !== "bombe") {
-                if (checkAround(indexX, indexY) != 0) {
-                    element.classList.add("uncovered");
-                    element.innerHTML = checkAround(indexX, indexY);
+
+
+
+                        setTimeout(() => {
+                            location.reload();
+                        }, 2000)
+                    }
+
+                    isFinished();
+                    console.log(indexX, indexY);
+            
+
                 } else {
-                    element.classList.add("uncovered");
+                    console.error("L'id de l'élément est invalide.");
                 }
             } else {
-                element.innerHTML = "💣";
-                element.classList.add("bombe");
-                setTimeout(() => {
-                    location.reload();
-                }, 2000)
+                console.error("L'id de l'élément est invalide.");
             }
-            isFinished();
 
         }.bind(element));
 
@@ -163,20 +196,6 @@ const isFinished = () => {
 // ---------------------------------- PROGRAMME PRINCIPAL-----------------------------------------------------
 // -----------------------------------------------------------------------------------------------------------
 
-/* globalThis.playground = [
-    [null, null, null, null, null, null, null, null, null, null],
-    [null, null, null, null, null, null, null, null, null, null],
-    [null, null, null, null, null, null, null, null, null, null],
-    [null, null, null, null, null, null, null, null, null, null],
-    [null, null, null, null, null, null, null, null, null, null],
-    [null, null, null, null, null, null, null, null, null, null],
-    [null, null, null, null, null, null, null, null, null, null],
-    [null, null, null, null, null, null, null, null, null, null],
-    [null, null, null, null, null, null, null, null, null, null],
-    [null, null, null, null, null, null, null, null, null, null]
-] */
-
-
 globalThis.bg = document.querySelector("#battleG");
 globalThis.nbrBombeTotalDiv = document.querySelector("#nbrBtotal");
 globalThis.begin = false;
@@ -190,8 +209,7 @@ globalThis.sizeSpan = document.querySelectorAll(".size");
 const difficultyValue = localStorage.getItem('difficultyValue');
 const gridSizeValue = localStorage.getItem('gridSizeValue');
 globalThis.playground = generateSquareGrid(gridSizeValue);
-/* globalThis.gridSizeValue = 0;
-globalThis.difficultyValue = 0; */ // <------- Probleme lors de la relecture du script
+
 
 console.dir(playground)
 
@@ -205,6 +223,13 @@ if (document.querySelector("#restart")) {
         location.reload();
     });
 }
+
+if (document.querySelector("#backHome")) {
+    document.querySelector("#backHome").addEventListener("click", () => {
+        location.href = "../index.html";
+    });
+}
+
 console.log(begin);
 document.querySelectorAll(".size").forEach(element => {
     element.innerHTML = document.getElementById("gridSize").value;
@@ -232,5 +257,6 @@ if (document.querySelector("#playNow")) {
 }
 play();
 
+// Avec une taille de grille de plus de 10x10, les id passent d'un format 2 a 3/4 chiffres ---> Coordonnées invalides
 
 console.dir(playground)
